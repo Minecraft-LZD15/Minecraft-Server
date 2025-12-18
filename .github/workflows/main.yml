@@ -28,6 +28,15 @@ jobs:
           sleep 3
 
       - name: 链接到 Tailscale
-        run: |
-          sudo tailscale up --authkey=ksLzNbsYX621CNTRL-mSv2uG8smVUSoPWavXNpVUYJUjtCfW8L --hostname=gh-runner-${GITHUB_RUN_ID}
+        run: |     
+          sudo tailscale up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }} --hostname=gh-runner-${GITHUB_RUN_ID}
           echo "TAILSCALE_IP=$(tailscale ip -4)" >> "$GITHUB_ENV"
+
+      - name: 包活
+        run: |
+          echo "=== IP ==="
+          echo "IP地址: ${TAILSCALE_IP}"
+          echo "=============================="
+          while true; do
+            sleep 300
+          done
