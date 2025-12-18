@@ -38,5 +38,8 @@ jobs:
       - name: 运行 server.jar
         run: java -Xmx1024M -Xms1024M -jar server.jar nogui
 
-      - name: 查看当前目录
-        run: ls
+      - name: 改 eula.txt
+        run: sed 's/eula=false/eula=true/g' inputfile.txt > eula.txt
+
+      - name: 重新运行 server.jar
+        run: java -Xmx1024M -Xms1024M -jar server.jar nogui
