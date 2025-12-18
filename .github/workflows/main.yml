@@ -21,7 +21,7 @@ jobs:
       - name: 安装 Tailscale
         run: curl -fsSL https://tailscale.com/install.sh | sh
 
-      - name: 运行 tailscaled
+      - name: 运行 Tailscaled
         run: |
           sudo mkdir -p /var/run
           nohup sudo tailscaled >/tmp/tailscaled.log 2>&1 & disown
@@ -31,6 +31,9 @@ jobs:
         run: |     
           sudo tailscale up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }} --hostname=gh-runner-${GITHUB_RUN_ID}
           echo "TAILSCALE_IP=$(tailscale ip -4)" >> "$GITHUB_ENV"
+
+      - name: 下载 server.jar
+        run: wget https://piston-data.mojang.com/v1/objects/64bb6d763bed0a9f1d632ec347938594144943ed/server.jar
 
       - name: 包活
         run: |
