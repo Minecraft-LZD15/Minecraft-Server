@@ -1,0 +1,19 @@
+name: Minecraft Server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Minecraft_Server:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3600
+
+    steps:
+      - name: 更新 APT
+        run: sudo apt-get update
+        
+      - name: 安装 JAVA
+        run: sudo apt install default-jre
+      
+      - name: 检验 JAVA 是否安装
+        run: java -version
