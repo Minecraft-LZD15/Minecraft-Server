@@ -13,7 +13,7 @@ jobs:
         run: sudo apt-get update
         
       - name: 安装 JAVA
-        run: sudo apt install default-jre
+        run: sudo apt install openjdk-21-jdk
       
       - name: 检验 JAVA 是否安装
         run: java -version
