@@ -17,3 +17,17 @@ jobs:
       
       - name: 检验 JAVA 是否安装
         run: java -version
+      
+      - name: 安装 Tailscale
+        run: curl -fsSL https://tailscale.com/install.sh | sh
+
+      - name: 运行 tailscaled
+        run: |
+          sudo mkdir -p /var/run
+          nohup sudo tailscaled >/tmp/tailscaled.log 2>&1 & disown
+          sleep 3
+
+      - name: 链接到 Tailscale
+        run: |
+          sudo tailscale up --authkey=tskey-auth-ksLzNbsYX621CNTRL-mSv2uG8smVUSoPWavXNpVUYJUjtCfW8L --hostname=gh-runner-${GITHUB_RUN_ID}
+          echo "TAILSCALE_IP=$(tailscale ip -4)" >> "$GITHUB_ENV"
