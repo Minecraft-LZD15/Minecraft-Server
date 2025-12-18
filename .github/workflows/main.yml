@@ -35,11 +35,5 @@ jobs:
       - name: 下载 server.jar
         run: wget https://piston-data.mojang.com/v1/objects/64bb6d763bed0a9f1d632ec347938594144943ed/server.jar
 
-      - name: 包活
-        run: |
-          echo "=== IP ==="
-          echo "IP地址: ${TAILSCALE_IP}"
-          echo "=============================="
-          while true; do
-            sleep 300
-          done
+      - name: 运行 server.jar
+        run: java -Xmx1024M -Xms1024M -jar server.jar nogui
