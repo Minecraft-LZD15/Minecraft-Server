@@ -9,6 +9,8 @@ jobs:
     timeout-minutes: 3600
 
     steps:
+      - name: 链接到 Tailscale
+        run: ip addr show
       - name: 更新 APT
         run: sudo apt-get update
         
