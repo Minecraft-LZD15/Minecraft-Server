@@ -32,14 +32,11 @@ jobs:
           sudo tailscale up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }} --hostname=gh-runner-${GITHUB_RUN_ID}
           echo "TAILSCALE_IP=$(tailscale ip -4)" >> "$GITHUB_ENV"
 
+      - name: 下载 eula.txt
+        run: https://github.com/Minecraft-LZD15/Minecraft-Server/releases/download/eula/eula.txt
+
       - name: 下载 server.jar
         run: wget https://piston-data.mojang.com/v1/objects/f69c284232d7c7580bd89a5a4931c3581eae1378/server.jar
 
       - name: 运行 server.jar
-        run: java -Xmx1024M -Xms1024M -jar server.jar nogui
-
-      - name: 改 eula.txt
-        run: sed 's/eula=false/eula=true/g' eula.txt > eula.txt
-
-      - name: 重新运行 server.jar
         run: java -Xmx1024M -Xms1024M -jar server.jar nogui
