@@ -15,9 +15,12 @@ jobs:
       - name: 安装 JAVA
         run: sudo apt install openjdk-21-jdk
       
-      - name: 检验 JAVA 是否安装
-        run: java -version
+      - name: 安装 SSH
+        run: sudo apt install openssh-server
       
+      - name: 查看 SSH 状态
+        run: sudo systemctl status ssh
+
       - name: 安装 Tailscale
         run: curl -fsSL https://tailscale.com/install.sh | sh
 
